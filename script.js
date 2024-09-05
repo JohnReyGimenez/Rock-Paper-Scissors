@@ -3,14 +3,14 @@ let computerScore = 0
 const choices = ["rock", "paper", "scissors"]
 
 
-function getComputerChoice(computerSelection) {
+function getComputerChoice() {
 const choice = Math.floor(Math.random() * choices.length);
 return choices[choice];
 }
 
 
 function getHumanChoice() {
-let userInput = prompt("Enter your choice(rock, paper or scissors):")
+let userInput = prompt("Enter your choice(rock, paper or scissors):").toLowerCase();
 if (choices.includes(userInput)) {
     return userInput; }
     else {
@@ -35,10 +35,11 @@ function checkWinner(humanSelection, computerSelection) {
     }
 }
 
-function playRound(humanSelection, computerSelection) {
+function playRound() {
     const humanSelection = getHumanChoice();
     if (humanSelection === null) {
-        "Invalid, try again."
+        console.log('Invalid, try again.')
+        return;
     }
     const computerSelection = getComputerChoice();
     const result = checkWinner(humanSelection, computerSelection)
@@ -56,10 +57,17 @@ function playRound(humanSelection, computerSelection) {
 }      
 
 function game() {
-for (let i = 0; i < 4; i++){
-    console.log(playRound());
-    console.log(`Score - Human: ${humanScore} Computer: ${computerScore}`)
+for (let i = 0; i < 5; i++){
+    const roundResult = playRound();
+    if (roundResult === undefined) {
+        i--;
+    }
+    else {
+        console.log(roundResult)
+        console.log(`Score - Human: ${humanScore} Computer: ${computerScore}`)
+    }    
 }
 }
 
+game();
 
