@@ -12,14 +12,14 @@ return choices[choice];
 function getHumanChoice() {
 let userInput = prompt("Enter your choice(rock, paper or scissors):")
 if (choices.includes(userInput)) {
-    return humanSelection; }
+    return userInput; }
     else {
         console.log("invalid choice")
         return null;
     }
 }
 
-function checkWinner() {
+function checkWinner(humanSelection, computerSelection) {
     if(humanSelection == computerSelection) {
         return "tie";
     }
@@ -36,27 +36,29 @@ function checkWinner() {
 }
 
 function playRound(humanSelection, computerSelection) {
-    getComputerChoice(computerSelection);
-    getHumanChoice();
+    const humanSelection = getHumanChoice();
+    if (humanSelection === null) {
+        "Invalid, try again."
+    }
+    const computerSelection = getComputerChoice();
     const result = checkWinner(humanSelection, computerSelection)
-    if(result == "tie") {
+    if(result === "tie") {
         return "its a tie!"
     }
-    else if(result == "human") {
-        humanScore++
+    else if(result === "human") {
+        humanScore++;
         return `you win! ${humanSelection} beats ${computerSelection}`;
     }
     else if(result == "computer") {
-        computerScore++
+        computerScore++;
         return `you lose! ${computerSelection} beats ${humanSelection}`
     }
 }      
 
 function game() {
 for (let i = 0; i < 4; i++){
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    console.log(playRound(humanSelection, computerSelection))
+    console.log(playRound());
+    console.log(`Score - Human: ${humanScore} Computer: ${computerScore}`)
 }
 }
 
