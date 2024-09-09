@@ -56,18 +56,9 @@ function playRound() {
     }
 }      
 
-function game() {
-for (let i = 0; i < 5; i++){
-    const roundResult = playRound();
-    if (roundResult === undefined) {
-        i--;
-    }
-    else {
-        console.log(roundResult)
-        console.log(`Score - Human: ${humanScore} Computer: ${computerScore}`)
-    }    
-}
-}
+const buttons = document.getElementsByTagName("button");
 
-game();
+buttons.addEventListener("click", e => {
+playRound();
+});
 
