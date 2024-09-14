@@ -2,7 +2,6 @@ let humanScore = 0
 let computerScore = 0
 const choices = ["rock", "paper", "scissors"]
 
-
 function getComputerChoice() {
 const choice = Math.floor(Math.random() * choices.length);
 return choices[choice];
@@ -56,9 +55,7 @@ function playRound() {
     }
 }      
 
-const buttons = document.getElementsByTagName("button");
+const buttons = document.getElementsByTagName("button").addEventListener(click, checkWinner(humanSelection, computerSelection));
 
-buttons.addEventListener("click", e => {
-playRound();
-});
+
 
