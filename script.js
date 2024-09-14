@@ -7,17 +7,6 @@ const choice = Math.floor(Math.random() * choices.length);
 return choices[choice];
 }
 
-
-function getHumanChoice() {
-let userInput = prompt("Enter your choice(rock, paper or scissors):").toLowerCase();
-if (choices.includes(userInput)) {
-    return userInput; }
-    else {
-        console.log("invalid choice")
-        return null;
-    }
-}
-
 function checkWinner(humanSelection, computerSelection) {
     if(humanSelection == computerSelection) {
         return "tie";
@@ -34,12 +23,7 @@ function checkWinner(humanSelection, computerSelection) {
     }
 }
 
-function playRound() {
-    const humanSelection = getHumanChoice();
-    if (humanSelection === null) {
-        console.log('Invalid, try again.')
-        return;
-    }
+function playRound(humanSelection) {
     const computerSelection = getComputerChoice();
     const result = checkWinner(humanSelection, computerSelection)
     if(result === "tie") {
@@ -55,7 +39,20 @@ function playRound() {
     }
 }      
 
-const buttons = document.getElementsByTagName("button").addEventListener(click, checkWinner(humanSelection, computerSelection));
+function updateScore() {
+    const scoreDiv = document.getElementById("results");
+    scoreDiv.textContent = `Human: ${humanScore}, Computer: ${computerScore}`;
+}
 
+const buttons = document.getElementsByTagName("button");
+for (let button of buttons) {
+    button.addEventListener("click", function() {
+        const humanSelection = button.id; // gets choice from buttons id
+        const resultMessage = playRound(humanSelection);
+          // Update the result and score in the HTML
+          document.getElementById('score').textContent = resultMessage;
+          updateScore();
+    })
+}
 
 
